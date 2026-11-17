@@ -1,6 +1,6 @@
 package ru.practicum.shareit.user;
 
-import java.util.*;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.ConflictException;
 
@@ -22,7 +22,7 @@ public class UserService {
                 || !email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
             throw new IllegalArgumentException("Invalid email");
         }
-        
+
         for (User u : storage.all()) {
             if (u.getEmail().equalsIgnoreCase(email)
                     && !u.getId().equals(excludeId)) {
@@ -34,23 +34,22 @@ public class UserService {
     // Создаёт нового пользователя
     public UserDto create(UserDto dto) {
         validateEmail(dto.getEmail(), null);
-        
         return UserMapper.toDto(storage.save(UserMapper.toUser(dto)));
     }
 
     // Обновляет данные существующего пользователя
     public UserDto update(long id, UserDto dto) {
         User u = storage.get(id);
-        
+
         if (dto.getEmail() != null) {
             validateEmail(dto.getEmail(), id);
             u.setEmail(dto.getEmail());
         }
-        
+
         if (dto.getName() != null) {
             u.setName(dto.getName());
         }
-        
+
         return UserMapper.toDto(u);
     }
 
