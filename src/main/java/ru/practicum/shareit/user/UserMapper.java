@@ -1,11 +1,11 @@
 package ru.practicum.shareit.user;
 
-// Класс для преобразования пользователей между моделью и DTO
-public final class UserMapper {
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
-    // Приватный конструктор запрещает создание экземпляров класса
-    private UserMapper() {
-    }
+// Класс для преобразования пользователей между моделью и DTO
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class UserMapper {
 
     // Преобразует модель пользователя в DTO
     public static UserDto toDto(User u) {
