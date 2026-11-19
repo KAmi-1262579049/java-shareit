@@ -1,16 +1,15 @@
 package ru.practicum.shareit.item;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.model.Item;
 
-// Класс для преобразования объектов Item и ItemDto
+// Класс для преобразования вещей между моделью и DTO
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ItemMapper {
 
-    // Приватный конструктор запрещает создание экземпляров класса
-    private ItemMapper() {
-    }
-
-    // Преобразует объект Item в ItemDto
+    // Преобразует модель вещи в DTO
     public static ItemDto toDto(Item i) {
         ItemDto d = new ItemDto();
         d.setId(i.getId());
@@ -21,7 +20,7 @@ public final class ItemMapper {
         return d;
     }
 
-    // Преобразует объект ItemDto в Item
+    // Преобразует DTO вещи в модель
     public static Item toItem(ItemDto d) {
         Item i = new Item();
         i.setId(d.getId());
